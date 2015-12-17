@@ -23,3 +23,16 @@ G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\b
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Web.WebPages.Razor.xml
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.dll
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.pdb
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\BlackCogs.dll.config
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\EntityFramework.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\EntityFramework.SqlServer.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Owin.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\EntityFramework.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\EntityFramework.SqlServer.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.csprojResolveAssemblyReference.cache
