@@ -36,3 +36,13 @@ G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\b
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.xml
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.csprojResolveAssemblyReference.cache
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.AttributedModel.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.Convention.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.Hosting.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.Runtime.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.TypedParts.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.AttributedModel.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.Convention.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.Hosting.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.Runtime.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Composition.TypedParts.xml
