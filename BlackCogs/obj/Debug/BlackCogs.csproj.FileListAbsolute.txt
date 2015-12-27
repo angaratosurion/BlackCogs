@@ -49,4 +49,13 @@ G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\b
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\NLog.config
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\NLog.dll
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\NLog.xml
-G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\NLog.xsd
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Security.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Security.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
