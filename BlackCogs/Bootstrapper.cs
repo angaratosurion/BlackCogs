@@ -120,6 +120,31 @@ namespace BlackCogs
                 string ap = null;
                 FileVersionInfo finof = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
                 ap = finof.ProductName;
+                ap = AppDomain.CurrentDomain.FriendlyName;
+
+
+                return ap;
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return null;
+            }
+        }
+        public static string GetApplicationName(string projectname)
+        {
+            try
+            {
+                string ap = null;
+                string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", projectname + ".dll");
+                if (CommonTools.isEmpty(projectname) == false && File.Exists(filepath)==true)
+                {
+                    FileVersionInfo finof = FileVersionInfo.GetVersionInfo(filepath);
+                    ap = finof.ProductName;
+                }
+
+
 
                 return ap;
             }
