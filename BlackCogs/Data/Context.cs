@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace BlackCogs.Data
         {
 
         }
-   
+        public IDbSet<Feature> Features { get; set; }
+        public IDbSet<GeneralSettings>  Settings { get; set; }
+
     }
 }
