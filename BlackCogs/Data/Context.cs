@@ -18,6 +18,8 @@ namespace BlackCogs.Data
         }
         public IDbSet<Feature> Features { get; set; }
         public IDbSet<GeneralSettings>  Settings { get; set; }
+        public GeneralSettings GeneralSettings { get { return this.Settings.FirstOrDefault();
+            } }
 
     }
 }

@@ -179,6 +179,7 @@
     <Compile Include="Interfaces\IModuleInfo.cs" />
     <Compile Include="Interfaces\IRouteRegistrar.cs" />
     <Compile Include="Interfaces\IRouteRegistrarMetadata.cs" />
+    <Compile Include="Managers\FeatureManager.cs" />
     <Compile Include="Managers\FileSystemManager.cs" />
     <Compile Include="Managers\BlackCogsUserManager.cs" />
     <Compile Include="ModuleInfo\Info.cs" />
