@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,20 @@ namespace BlackCogs.Data
 
         }
         public IDbSet<Feature> Features { get; set; }
-        public IDbSet<GeneralSettings>  Settings { get; set; }
-        public GeneralSettings GeneralSettings { get { return this.Settings.FirstOrDefault();
-            } }
+        public IDbSet<GeneralSettings> Settings { get; set; }
+        public GeneralSettings GeneralSettings
+        {
+            get
+            {
+                return this.Settings.FirstOrDefault();
+            }
+        }
+        //
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
+        }
     }
 }

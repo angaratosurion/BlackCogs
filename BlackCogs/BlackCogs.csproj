@@ -163,6 +163,7 @@
     <Compile Include="Application\SmsService.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CommonTools.cs" />
+    <Compile Include="Controllers\Factory\CustomControllerFactory.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\Models\Feature.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Managers\BlackCogsUserManager.cs" />
     <Compile Include="ModuleInfo\Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Engines\CustomViewEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,7 +7,7 @@ using System.Linq;
 using BlackCogs.Interfaces;
 using System.Reflection;
 using System.Diagnostics;
-
+using System.Web.Mvc;
 
 namespace BlackCogs
 {
@@ -58,13 +58,19 @@ namespace BlackCogs
             {
 
                 var type = default(T);
+               
                 if (CompositionContainer == null) return type;
 
                 if (!string.IsNullOrWhiteSpace(contractName))
+                {
                     type = CompositionContainer.GetExportedValue<T>(contractName);
+                }
                 else
+                {
                     type = CompositionContainer.GetExportedValue<T>();
-
+                }
+              
+                   
                 return type;
             }
             catch (Exception ex)
