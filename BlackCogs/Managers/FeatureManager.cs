@@ -30,7 +30,7 @@ namespace BlackCogs.Managers
 
             }
         }
-        public  Boolean FeatureExit(string name)
+        public  Boolean FeatureExists(string name)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace BlackCogs.Managers
             try
             {
                 Feature modl = new Feature();
-                if ( CommonTools.isEmpty(name)==false && contr !=null && this.FeatureExit(name)==false)
+                if ( CommonTools.isEmpty(name)==false && contr !=null && this.FeatureExists(name)==false)
                 {
                     modl.Controller = contr;
                     modl.Disabled = disabled;

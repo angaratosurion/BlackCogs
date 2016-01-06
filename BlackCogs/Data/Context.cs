@@ -17,6 +17,10 @@ namespace BlackCogs.Data
         {
 
         }
+        public static Context Create()
+        {
+            return new Context();
+        }
         public IDbSet<Feature> Features { get; set; }
         public IDbSet<GeneralSettings> Settings { get; set; }
         public GeneralSettings GeneralSettings

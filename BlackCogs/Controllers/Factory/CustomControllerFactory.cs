@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace BlackCogs.Controllers.Factory
             try
             {
                 _defaultControllerFactory = new DefaultControllerFactory();
+                
             }
             catch (Exception ex)
             {
@@ -33,9 +35,17 @@ namespace BlackCogs.Controllers.Factory
                 var controller = Bootstrapper.GetInstance<IController>(controllerName);
 
                 if (controller == null)
+                {
                     throw new Exception("Controller not found!");
+                }
 
                 return controller;
+            }
+            catch(ImportCardinalityMismatchException ex)
+            {
+                this.ReleaseController(Bootstrapper.GetInstance<IController>(controllerName));
+                
+                return null;
             }
             catch (Exception ex)
             {

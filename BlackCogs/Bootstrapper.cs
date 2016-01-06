@@ -29,7 +29,7 @@ namespace BlackCogs
 
                 var catalog = new AggregateCatalog();
 
-                catalog.Catalogs.Add(new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")));
+               // catalog.Catalogs.Add(new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")));
 
                 foreach (var plugin in pluginFolders)
                 {
