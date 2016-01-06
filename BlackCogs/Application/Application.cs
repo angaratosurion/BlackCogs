@@ -13,11 +13,10 @@ namespace BlackCogs.Application
 {
     public class Application : System.Web.HttpApplication
     {
-       
+
         //[Import]
         //private CustomControllerFactory ControllerFactory;
-
-        protected void Application_Start()
+        public static void BootStrap()
         {
             try
             {
@@ -26,19 +25,44 @@ namespace BlackCogs.Application
                 var plugins = Directory.GetDirectories(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                     "Modules")).ToList();
 
+
                 plugins.ForEach(s =>
                 {
                     var di = new DirectoryInfo(s);
                     pluginFolders.Add(di.Name);
                 });
 
+              
+                if (plugins.Count > 0)
+                {
+                    Bootstrapper.Compose(pluginFolders);
+                }
+                else
+                {
+                    Bootstrapper.Compose(pluginFolders, true);
+                }
+                ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
+                ViewEngines.Engines.Add(new CustomViewEngine(pluginFolders));
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+            }
+        }
+
+        protected void Application_Start()
+        {
+            try
+            {
+              
+              
                 AreaRegistration.RegisterAllAreas();
                 FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
                 RouteConfig.RegisterRoutes(RouteTable.Routes);
                 BundleConfig.RegisterBundles(BundleTable.Bundles);
-                Bootstrapper.Compose(pluginFolders);
-                ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
-                ViewEngines.Engines.Add(new CustomViewEngine(pluginFolders));
+              BootStrap();
+          
             }
             catch (Exception ex)
             {

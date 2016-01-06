@@ -18,14 +18,14 @@ using BlackCogs.Application;
 
 namespace BlackCogs.Controllers
 {
-    [Export("Account", typeof(IController))]
+    [Export("AccountBase", typeof(IController))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     [Authorize]
    
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private ApplicationSignInManager _signInManager=CommonTools._signInManager;
+        private ApplicationUserManager _userManager=CommonTools._userManager;
 
         public AccountController()
         {
@@ -43,7 +43,7 @@ namespace BlackCogs.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
+           set 
             { 
                 _signInManager = value; 
             }
@@ -55,7 +55,7 @@ namespace BlackCogs.Controllers
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            private set
+            set
             {
                 _userManager = value;
             }
@@ -94,7 +94,7 @@ namespace BlackCogs.Controllers
 
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, change to shouldLockout: true
-                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                var result = await this.SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
                 switch (result)
                 {
                     case SignInStatus.Success:

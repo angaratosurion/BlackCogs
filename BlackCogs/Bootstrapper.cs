@@ -51,6 +51,41 @@ namespace BlackCogs
                 CommonTools.ErrorReporting(ex);
             }
         }
+        public static void Compose(List<string> pluginFolders,Boolean includethebindir)
+        {
+            try
+            {
+                 
+
+                if (IsLoaded) return;
+
+                var catalog = new AggregateCatalog();
+                if (includethebindir == true)
+                {
+
+                     catalog.Catalogs.Add(new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")));
+                }
+
+                foreach (var plugin in pluginFolders)
+                {
+                    var directoryCatalog = new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                        "Modules", plugin));
+                    RegisterPath(directoryCatalog.FullPath);
+                    catalog.Catalogs.Add(directoryCatalog);
+
+                }
+                CompositionContainer = new CompositionContainer(catalog);
+
+                CompositionContainer.ComposeParts();
+                ActionVerbs = CompositionContainer.GetExports<IActionVerb, IActionVerbMetadata>();
+                ModuleInfos = CompositionContainer.GetExports<IModuleInfo>();
+                IsLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                CommonTools.ErrorReporting(ex);
+            }
+        }
 
         public static T GetInstance<T>(string contractName = null)
         {
