@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using BlackCogs.Application;
+using BlackCogs.Configuration;
 using BlackCogs.Controllers.Factory;
 using BlackCogs.Views.Engines;
 
@@ -13,7 +14,7 @@ namespace BlackCogs.Application
 {
     public class Application : System.Web.HttpApplication
     {
-
+        static BlackCogsSettingManager confmngr = new BlackCogsSettingManager();
         //[Import]
         //private CustomControllerFactory ControllerFactory;
         public static void BootStrap()
@@ -32,14 +33,18 @@ namespace BlackCogs.Application
                     pluginFolders.Add(di.Name);
                 });
 
-              
-                if (plugins.Count > 0)
+               
+                if (plugins.Count > 0 &&confmngr.IsBinariesEnabledOnModulesFolder() == true )
                 {
                     Bootstrapper.Compose(pluginFolders);
                 }
-                else
+                else if (confmngr.IsBinariesEnabledOnModulesFolder() != true)
                 {
                     Bootstrapper.Compose(pluginFolders, true);
+                }
+                else
+                {
+                    Bootstrapper.Compose(pluginFolders, false);
                 }
                 ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
                 ViewEngines.Engines.Add(new CustomViewEngine(pluginFolders));

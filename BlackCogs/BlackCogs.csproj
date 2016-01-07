@@ -181,6 +181,7 @@
     <Compile Include="Application\SmsService.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CommonTools.cs" />
+    <Compile Include="Configuration\BlackCogsSettingManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Factory\CustomControllerFactory.cs" />
     <Compile Include="Controllers\UserController.cs" />

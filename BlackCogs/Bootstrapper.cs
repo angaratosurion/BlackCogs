@@ -8,6 +8,7 @@ using BlackCogs.Interfaces;
 using System.Reflection;
 using System.Diagnostics;
 using System.Web.Mvc;
+using BlackCogs.Configuration;
 
 namespace BlackCogs
 {
@@ -15,6 +16,7 @@ namespace BlackCogs
     {
         private static CompositionContainer CompositionContainer;
         private static bool IsLoaded = false;
+        
         //   static CommonTools cmTools = new CommonTools();
         [ImportMany]
         private IEnumerable<Lazy<IRouteRegistrar, IRouteRegistrarMetadata>> RouteRegistrars;

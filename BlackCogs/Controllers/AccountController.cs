@@ -18,14 +18,14 @@ using BlackCogs.Application;
 
 namespace BlackCogs.Controllers
 {
-    [Export("Account", typeof(IController))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
+    //[Export("Account", typeof(IController))]
+    //[PartCreationPolicy(CreationPolicy.NonShared)]
     [Authorize]
    
     public abstract class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;//=CommonTools._signInManager;
-        private ApplicationUserManager _userManager;//=CommonTools._userManager;
+        private ApplicationSignInManager _signInManager=CommonTools._signInManager;
+        private ApplicationUserManager _userManager=CommonTools._userManager;
 
         public AccountController()
         { 
@@ -135,12 +135,27 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
-            // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
+            try
             {
-                return View("Error");
+
+
+                // Require that the user has already logged in via username/password or external login
+                if (!await SignInManager.HasBeenVerifiedAsync())
+                {
+                    return View("Error");
+                }
+                return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
             }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -150,26 +165,41 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
-            }
 
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid code.");
+
+                if (!ModelState.IsValid)
+                {
                     return View(model);
+                }
+
+                // The following code protects for brute force attacks against the two factor codes. 
+                // If a user enters incorrect codes for a specified amount of time then the user account 
+                // will be locked out for a specified amount of time. 
+                // You can configure the account lockout settings in IdentityConfig
+                var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(model.ReturnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid code.");
+                        return View(model);
+                }
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
@@ -178,7 +208,22 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            try
+            {
+
+            
             return View();
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -188,6 +233,10 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            try
+            {
+
+          
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -202,13 +251,24 @@ namespace BlackCogs.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "HomeWiki");
+                     return RedirectToRoute("Default");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -216,12 +276,27 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
+            try
+            {
+
+           
             if (userId == null || code == null)
             {
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -229,7 +304,22 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
+            try
+            {
+
+           
             return View();
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -239,6 +329,10 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
+            try
+            {
+
+           
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
@@ -258,6 +352,17 @@ namespace BlackCogs.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -265,7 +370,24 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
+            try
+            {
+
+           
+            
             return View();
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
+
         }
 
         //
@@ -273,7 +395,22 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
+            try
+            {
+
+         
             return code == null ? View("Error") : View();
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -283,6 +420,10 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
+            try
+            {
+
+          
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -300,6 +441,17 @@ namespace BlackCogs.Controllers
             }
             AddErrors(result);
             return View();
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -307,7 +459,22 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
+            try
+            {
+
+            
             return View();
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -317,8 +484,25 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
+            try
+            {
+
+           
+           
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
+
         }
 
         //
@@ -326,6 +510,10 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
+            try
+            {
+
+            
             var userId = await SignInManager.GetVerifiedUserIdAsync();
             if (userId == null)
             {
@@ -334,6 +522,17 @@ namespace BlackCogs.Controllers
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -343,6 +542,10 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
+            try
+            {
+
+          
             if (!ModelState.IsValid)
             {
                 return View();
@@ -354,6 +557,18 @@ namespace BlackCogs.Controllers
                 return View("Error");
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -361,6 +576,10 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+            try
+            {
+
+            
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
@@ -384,6 +603,17 @@ namespace BlackCogs.Controllers
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -393,6 +623,10 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+            try
+            {
+
+          
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");
@@ -422,6 +656,17 @@ namespace BlackCogs.Controllers
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -430,8 +675,24 @@ namespace BlackCogs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            try
+            {
+
+           
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "HomeWiki");
+            
+                return RedirectToRoute("Default");
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         //
@@ -439,11 +700,30 @@ namespace BlackCogs.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
+            try
+            {
+
+          
             return View();
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         protected override void Dispose(bool disposing)
         {
+            try
+            {
+
+            
             if (disposing)
             {
                 if (_userManager != null)
@@ -460,6 +740,18 @@ namespace BlackCogs.Controllers
             }
 
             base.Dispose(disposing);
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+              //  return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
+
         }
 
         #region Helpers
@@ -476,19 +768,49 @@ namespace BlackCogs.Controllers
 
         private void AddErrors(IdentityResult result)
         {
+            try
+            {
+
+           
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
+            }
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+               // return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
+            try
+            {
+
+            
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "HomeWiki");
+             return RedirectToRoute("Default");
+            }
+            catch (ValidationException ex)
+            {
+                throw (ex);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         public class ChallengeResult : HttpUnauthorizedResult
@@ -511,12 +833,27 @@ namespace BlackCogs.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
+                try
+                {
+
+               
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
                 {
                     properties.Dictionary[XsrfKey] = UserId;
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+                }
+                catch (ValidationException ex)
+                {
+                    throw (ex);
+                }
+                catch (Exception ex)
+                {
+
+                    CommonTools.ErrorReporting(ex);
+                   // return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+                }
             }
         }
         #endregion
