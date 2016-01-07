@@ -18,17 +18,22 @@ using BlackCogs.Application;
 
 namespace BlackCogs.Controllers
 {
-    [Export("AccountBase", typeof(IController))]
+    [Export("Account", typeof(IController))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     [Authorize]
    
-    public class AccountController : Controller
+    public abstract class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager=CommonTools._signInManager;
-        private ApplicationUserManager _userManager=CommonTools._userManager;
+        private ApplicationSignInManager _signInManager;//=CommonTools._signInManager;
+        private ApplicationUserManager _userManager;//=CommonTools._userManager;
 
         public AccountController()
+        { 
+        }
+        public AccountController(Controller cont)
         {
+            this.SignInManager= HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            this.UserManager= HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -41,9 +46,13 @@ namespace BlackCogs.Controllers
         {
             get
             {
+
+               
+                var singmng= HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-           set 
+          set 
             { 
                 _signInManager = value; 
             }
@@ -55,7 +64,7 @@ namespace BlackCogs.Controllers
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
-            set
+           set
             {
                 _userManager = value;
             }
