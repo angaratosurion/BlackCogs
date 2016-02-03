@@ -15,7 +15,9 @@ namespace BlackCogs.Data
         public Context()
             : base("DefaultConnection")
         {
-
+            this.Configuration.AutoDetectChangesEnabled = true;
+            this.Configuration.LazyLoadingEnabled = true;
+            this.Configuration.ValidateOnSaveEnabled = false;
         }
         public static Context Create()
         {
@@ -35,6 +37,7 @@ namespace BlackCogs.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+           
 
         }
     }

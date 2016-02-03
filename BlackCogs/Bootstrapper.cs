@@ -53,7 +53,7 @@ namespace BlackCogs
                 CommonTools.ErrorReporting(ex);
             }
         }
-        public static void Compose(List<string> pluginFolders,Boolean includethebindir)
+        public static void Compose(List<string> pluginFolders,Boolean binonmodulesdir)
         {
             try
             {
@@ -62,19 +62,20 @@ namespace BlackCogs
                 if (IsLoaded) return;
 
                 var catalog = new AggregateCatalog();
-                if (includethebindir == true)
+                if (binonmodulesdir != true)
                 {
 
-                     catalog.Catalogs.Add(new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")));
+                    catalog.Catalogs.Add(new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin")));
                 }
+                else {
+                    foreach (var plugin in pluginFolders)
+                    {
+                        var directoryCatalog = new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                            "Modules", plugin));
+                        RegisterPath(directoryCatalog.FullPath);
+                        catalog.Catalogs.Add(directoryCatalog);
 
-                foreach (var plugin in pluginFolders)
-                {
-                    var directoryCatalog = new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                        "Modules", plugin));
-                    RegisterPath(directoryCatalog.FullPath);
-                    catalog.Catalogs.Add(directoryCatalog);
-
+                    }
                 }
                 CompositionContainer = new CompositionContainer(catalog);
 

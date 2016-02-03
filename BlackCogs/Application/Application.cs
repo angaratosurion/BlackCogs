@@ -38,13 +38,13 @@ namespace BlackCogs.Application
                 {
                     Bootstrapper.Compose(pluginFolders);
                 }
-                else if (confmngr.IsBinariesEnabledOnModulesFolder() != true)
-                {
-                    Bootstrapper.Compose(pluginFolders, true);
-                }
+                //else if (confmngr.IsBinariesEnabledOnModulesFolder() != true)
+                //{
+                //    Bootstrapper.Compose(pluginFolders, true);
+                //}
                 else
                 {
-                    Bootstrapper.Compose(pluginFolders, false);
+                    Bootstrapper.Compose(pluginFolders, confmngr.IsBinariesEnabledOnModulesFolder());
                 }
                 ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
                 ViewEngines.Engines.Add(new CustomViewEngine(pluginFolders));
