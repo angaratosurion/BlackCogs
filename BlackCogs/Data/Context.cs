@@ -15,9 +15,9 @@ namespace BlackCogs.Data
         public Context()
             : base("DefaultConnection")
         {
-            this.Configuration.AutoDetectChangesEnabled = true;
-            this.Configuration.LazyLoadingEnabled = true;
-            this.Configuration.ValidateOnSaveEnabled = false;
+            //this.Configuration.AutoDetectChangesEnabled = true;
+            //this.Configuration.LazyLoadingEnabled = true;
+            //this.Configuration.ValidateOnSaveEnabled = false;
         }
         public static Context Create()
         {
