@@ -61,6 +61,6 @@ G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\b
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Web.WebPages.xml
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Web.WebPages.Deployment.xml
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\bin\Debug\System.Web.WebPages.Razor.xml
+G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.csprojResolveAssemblyReference.cache
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.dll
 G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.pdb
-G:\AutoSyncWithParis-Server\My Programs\dotNet\Open Source\BlackCogs\BlackCogs\obj\Debug\BlackCogs.csprojResolveAssemblyReference.cache
