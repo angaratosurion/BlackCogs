@@ -21,7 +21,7 @@ namespace BlackCogs.Data.Models
                 
                 //if ( this !=null)
                 {
-                    ap.Id = this.Id;
+                    //ap.Id = this.Id;
                     ap.UserName = this.UserName;
                    ap.AccessFailedCount = this.AccessFailedCount;
                     ap.LockoutEnabled = this.LockoutEnabled;
@@ -33,11 +33,12 @@ namespace BlackCogs.Data.Models
                     ap.TwoFactorEnabled = this.TwoFactorEnabled;
                     ap.Email = this.Email;
                     ap.EmailConfirmed = this.EmailConfirmed;
-                    var roles = this.Roles;
-                     foreach( var rol in roles)
-                    {
-                        ap.Roles.Add(rol);
-                    }
+                    //var roles = this.Roles;
+                   
+                    // foreach( var rol in roles)
+                    //{
+                    //    ap.Roles.Add(rol);
+                    //}
                     var claims = this.Claims;
                     foreach(var claim in claims)
                     {
