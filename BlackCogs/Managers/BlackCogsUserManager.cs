@@ -48,6 +48,24 @@ namespace BlackCogs.Managers
                 return null;
             }
         }
+        public ApplicationUser GetUserbyID(string id)
+        {
+            try
+            {
+                ApplicationUser ap = null;
+                if (id != null)
+                {
+                    ap = this.db.Users.First(u => u.Id== id);
+                }
+                return ap;
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return null;
+            }
+        }
         public void EditUser(string username, ApplicationUser user)
         {
             try
