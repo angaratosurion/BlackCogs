@@ -34,11 +34,17 @@ namespace BlackCogs
        }
        public static void ErrorReporting (Exception ex)
        {
-           //throw (ex);
-           
+            //throw (ex);
+            BlackCogs.Configuration.BlackCogsSettingManager conf = new Configuration.BlackCogsSettingManager();
+
+
             NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
             logger.Fatal(ex);
-            throw (ex);
+            if (conf.ExceptionShownOnBrowser() == true)
+            {
+
+                throw (ex);
+            }
 
         }
     }

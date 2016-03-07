@@ -12,6 +12,8 @@ namespace BlackCogs.Configuration
         AppSettingsReader rdr = new AppSettingsReader();
         Boolean searchforbinariesatmodulesfodler;
         public const string BinariesONModulesFolder = "BinariesONModulesFolder";
+        public const string ConstExceptionShowingonBrowser = "ExcShownOnBrowser";
+        public static Boolean ExceptionShownonBrowser = true;
         public  Boolean IsBinariesEnabledOnModulesFolder()
         {
             try
@@ -32,6 +34,25 @@ namespace BlackCogs.Configuration
             {
                 CommonTools.ErrorReporting(ex);
                 return false;
+            }
+        }
+        public Boolean ExceptionShownOnBrowser()
+        {
+            try
+            {
+                Boolean app = true;
+                app = Convert.ToBoolean(rdr.GetValue(ConstExceptionShowingonBrowser, typeof(bool)));
+
+                ExceptionShownonBrowser = app;
+
+
+                return app;
+
+            }
+            catch (Exception ex)
+            {
+                CommonTools.ErrorReporting(ex);
+                return true;
             }
         }
     }
