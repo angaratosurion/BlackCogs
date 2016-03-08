@@ -12,7 +12,7 @@ using BlackCogs.Views.Engines;
 
 namespace BlackCogs.Application
 {
-    public class Application : System.Web.HttpApplication
+    public abstract class Application : System.Web.HttpApplication
     {
         static BlackCogsSettingManager confmngr = new BlackCogsSettingManager();
         //[Import]
@@ -56,7 +56,7 @@ namespace BlackCogs.Application
             }
         }
 
-        protected void Application_Start()
+        protected void Application_Start(bool bypasshome)
         {
             try
             {
