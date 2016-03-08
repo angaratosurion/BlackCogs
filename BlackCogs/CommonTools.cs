@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,10 +37,34 @@ namespace BlackCogs
        {
             //throw (ex);
             BlackCogs.Configuration.BlackCogsSettingManager conf = new Configuration.BlackCogsSettingManager();
+            if (ex.GetBaseException() is ValidationException)
+            {
+                ValidationErrorReporting((ValidationException)ex);
+
+
+            }
+            else
+            {
+
+                NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+                logger.Fatal(ex);
+                if (conf.ExceptionShownOnBrowser() == true)
+                {
+
+                    throw (ex);
+                }
+            }
+
+        }
+        public static void ValidationErrorReporting(ValidationException ex)
+        {
+            //throw (ex);
+            BlackCogs.Configuration.BlackCogsSettingManager conf = new Configuration.BlackCogsSettingManager();
 
 
             NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-            logger.Fatal(ex);
+          
+            logger.Info(ex);
             if (conf.ExceptionShownOnBrowser() == true)
             {
 
