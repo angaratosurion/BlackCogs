@@ -56,7 +56,7 @@ namespace BlackCogs.Application
             }
         }
 
-        protected void Application_Start(bool bypasshome)
+        protected void Application_Start()
         {
             try
             {
