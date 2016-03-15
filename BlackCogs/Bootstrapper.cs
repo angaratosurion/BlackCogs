@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Web.Mvc;
 using BlackCogs.Configuration;
+using System.Web.Routing;
 
 namespace BlackCogs
 {
@@ -19,7 +20,7 @@ namespace BlackCogs
         
         //   static CommonTools cmTools = new CommonTools();
         [ImportMany]
-        private IEnumerable<Lazy<IRouteRegistrar, IRouteRegistrarMetadata>> RouteRegistrars;
+        private static IEnumerable<Lazy<IRouteRegistrar, IRouteRegistrarMetadata>> RouteRegistrars;
         private static IEnumerable<Lazy<IActionVerb, IActionVerbMetadata>> ActionVerbs;
         private static IEnumerable<Lazy<IModuleInfo>> ModuleInfos;
         public static void Compose(List<string> pluginFolders)
@@ -46,6 +47,8 @@ namespace BlackCogs
                 CompositionContainer.ComposeParts();
                 ActionVerbs = CompositionContainer.GetExports<IActionVerb, IActionVerbMetadata>();
                 ModuleInfos = CompositionContainer.GetExports<IModuleInfo>();
+                RouteRegistrars = CompositionContainer.GetExports<IRouteRegistrar,IRouteRegistrarMetadata>();
+                RegisterRoutes();
                 IsLoaded = true;
             }
             catch (Exception ex)
@@ -82,6 +85,8 @@ namespace BlackCogs
                 CompositionContainer.ComposeParts();
                 ActionVerbs = CompositionContainer.GetExports<IActionVerb, IActionVerbMetadata>();
                 ModuleInfos = CompositionContainer.GetExports<IModuleInfo>();
+                RouteRegistrars = CompositionContainer.GetExports<IRouteRegistrar, IRouteRegistrarMetadata>();
+                RegisterRoutes();
                 IsLoaded = true;
             }
             catch (Exception ex)
@@ -197,6 +202,32 @@ namespace BlackCogs
 
                 CommonTools.ErrorReporting(ex);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Registers any routes required by the application.
+        /// </summary>
+        public static void RegisterRoutes()
+        {
+            try
+            {
+                if (RouteRegistrars == null || RouteRegistrars.Count() == 0)
+                    return;
+
+                var routes = RouteTable.Routes;
+
+                var registrars = RouteRegistrars
+                    .OrderBy(lazy => lazy.Metadata.Order)
+                    .Select(lazy => lazy.Value).ToList();
+              
+                registrars.ForEach(r => r.RegisterIgnoreRoutes(routes));
+                registrars.ForEach(r => r.RegisterRoutes(routes));
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
             }
         }
     }
