@@ -67,7 +67,7 @@ namespace BlackCogs.Application
                // RouteConfig.RegisterRoutes(RouteTable.Routes);
                 BundleConfig.RegisterBundles(BundleTable.Bundles);
               BootStrap();
-                Bootstrapper.RegisterRoutes();
+               Bootstrapper.RegisterRoutes();
           
             }
             catch (Exception ex)

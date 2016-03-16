@@ -24,6 +24,10 @@ namespace BlackCogs.Interfaces
         /// </summary>
         string Controller { get; }
         string Description { get; }
+        /// <summary>
+        /// Set's if it needs to be access by admins
+        /// </summary>
+        Boolean isAdminPalnel { get;  }
         #endregion
     }
 }
