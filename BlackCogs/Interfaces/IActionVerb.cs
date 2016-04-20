@@ -28,6 +28,14 @@ namespace BlackCogs.Interfaces
         /// Set's if it needs to be access by admins
         /// </summary>
         Boolean isAdminPalnel { get;  }
+        /// <summary>
+        /// Name of the Module
+        /// </summary>
+        String ModuleName { get; }
+        /// <summary>
+        /// Description of the Module 
+        /// </summary>
+        String Moduledescription { get;}
         #endregion
     }
 }

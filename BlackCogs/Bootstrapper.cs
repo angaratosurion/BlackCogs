@@ -220,14 +220,18 @@ namespace BlackCogs
                 var registrars = RouteRegistrars
                     .OrderBy(lazy => lazy.Metadata.Order)
                     .Select(lazy => lazy.Value).ToList();
+                 
               
                 registrars.ForEach(r => r.RegisterIgnoreRoutes(routes));
                 registrars.ForEach(r => r.RegisterRoutes(routes));
             }
             catch (Exception ex)
             {
-
-                CommonTools.ErrorReporting(ex);
+                System.ArgumentException et = new ArgumentException();
+                if (ex !=et)
+                {
+                    CommonTools.ErrorReporting(ex);
+                }
             }
         }
     }
