@@ -8,23 +8,45 @@ using System.Web.Routing;
 
 namespace BlackCogs.Tools
 {
-    public static class RouteCollectionExtensions
+    public static class BlackRouteCollectionExtensions
     {
 
         static Dictionary<string, Route> routes = new Dictionary<string, Route>();
         static CommonTools cmtools = new CommonTools();
         public static Route MapRouteWithName(this RouteCollection routes,
-        string name, string url, object defaults, object constraints)
+        string name, string url, object defaults)//, object constraints)
         {
             try
             {
                 if ( ExistsBasedonName(name) !=true)
                     {
-                    Route route = routes.MapRoute(name, url, defaults, constraints);
+                    Route route = routes.MapRoute(name, url, defaults);//, constraints);
                     route.DataTokens = new RouteValueDictionary();
                     route.DataTokens.Add("RouteName", name);
                     routes.Add(name, route);
 
+                    return route;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                CommonTools.ErrorReporting(ex);
+                return null;
+            }
+        }
+        public static Route MapRouteWithName(this RouteCollection routes,
+      string name, string url, object defaults , object constraints)
+        {
+            try
+            {
+                if (ExistsBasedonName(name) != true)
+                {
+                    Route route = routes.MapRoute(name, url, defaults , constraints);
+                    route.DataTokens = new RouteValueDictionary();
+                    route.DataTokens.Add("RouteName", name);
+                    routes.Add(name, route);
+                    
                     return route;
                 }
                 return null;
