@@ -11,7 +11,7 @@ namespace BlackCogs.Tools
     public static class BlackRouteCollectionExtensions
     {
 
-        static Dictionary<string, Route> routes = new Dictionary<string, Route>();
+        static Dictionary<string, Route> Routes = new Dictionary<string, Route>();
         static CommonTools cmtools = new CommonTools();
         public static Route MapRouteWithName(this RouteCollection routes,
         string name, string url, object defaults)//, object constraints)
@@ -24,9 +24,15 @@ namespace BlackCogs.Tools
                     route.DataTokens = new RouteValueDictionary();
                     route.DataTokens.Add("RouteName", name);
                     routes.Add(name, route);
+                    Routes.Add(name, route);
 
                     return route;
                 }
+                return null;
+
+            }
+            catch (System.ArgumentException ex)
+            {
                 return null;
             }
             catch (Exception ex)
@@ -46,9 +52,13 @@ namespace BlackCogs.Tools
                     route.DataTokens = new RouteValueDictionary();
                     route.DataTokens.Add("RouteName", name);
                     routes.Add(name, route);
-                    
+                    Routes.Add(name, route);
                     return route;
                 }
+                return null;
+            }
+            catch(System.ArgumentException ex)
+            {
                 return null;
             }
             catch (Exception ex)
@@ -64,7 +74,7 @@ namespace BlackCogs.Tools
                 Boolean ap = false;
                   if ( name !=null)
                 {
-                    var rt = routes.FirstOrDefault(x => x.Key == name).Value;
+                    var rt = Routes.FirstOrDefault(x => x.Key == name).Value;
                     if ( rt!=null)
                     {
                         ap = true;
