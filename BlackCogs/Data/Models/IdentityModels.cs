@@ -13,6 +13,9 @@ namespace BlackCogs.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        [Required]
+        [Display(Name ="UserName")]
+        public string DisplayName { get; set; }
         public ApplicationUser Clone()
         {
             try

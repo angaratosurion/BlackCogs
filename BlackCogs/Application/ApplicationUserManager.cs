@@ -27,6 +27,7 @@ namespace BlackCogs.Application
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
+                
             };
 
             // Configure validation logic for passwords
@@ -40,9 +41,10 @@ namespace BlackCogs.Application
             };
 
             // Configure user lockout defaults
-            manager.UserLockoutEnabledByDefault = true;
+            manager.UserLockoutEnabledByDefault = false;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.

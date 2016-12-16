@@ -219,10 +219,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Views\User\AddUserToRole.cshtml" />
+    <None Include="Views\User\CreateNewRole.cshtml" />
+    <None Include="Views\User\CreateNewUser.cshtml" />
+    <None Include="Views\User\DeleteRole.cshtml" />
+    <None Include="Views\User\Details.cshtml" />
+    <None Include="Views\User\GetRoles.cshtml" />
+    <None Include="Views\User\Index.cshtml" />
+    <None Include="Views\User\RemoveUserFromRole.cshtml" />
+    <None Include="Views\User\RoleDetails.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\User\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
