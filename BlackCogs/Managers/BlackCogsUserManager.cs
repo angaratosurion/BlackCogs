@@ -121,9 +121,43 @@ namespace BlackCogs.Managers
                 return null;
             }
         }
+        public void DeleteUser(string username)
+        {
+            try
+            {
+                if (CommonTools.isEmpty(username) == false && this.UserExists(username)==true)
+                {
+                    ApplicationUser user = this.GetUser(username);
+                    List<IdentityRole> roles=this.GetRolesOfUser(username);
+                    if ( roles!=null)
+                    {
+                       foreach(var r in roles)
+                        {
+                            this.RemoveUserFromRole(r.Name, username);
+
+                        }
+                    }
+                    if (user != null)//&& this._userManager!=null)
+                    {
+                        
+                        this.db.Users.Remove(user);
+                        this.db.SaveChanges();
+
+                    }
+                   
+                  
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                // return null;
+            }
+        }
 
 
-      
         #endregion
         #region roles
         public Boolean RoleExists(string Name)
@@ -281,6 +315,7 @@ namespace BlackCogs.Managers
                 // return null;
             }
         }
+
         public List<ApplicationUser> GetUsersofRole(string Name)
         {
             try
