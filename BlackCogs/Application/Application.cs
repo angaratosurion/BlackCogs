@@ -82,13 +82,14 @@ namespace BlackCogs.Application
             if (lastException.GetBaseException() is System.Security.Cryptography.CryptographicException)
             {
                 Server.ClearError();
-                if (Request.IsAuthenticated)
-                {
-                    
-                    Session.Clear();
-                }
-                Response.Cookies.Clear();
-                Response.Redirect("~");
+                 if (Request.IsAuthenticated)
+                 {
+
+                     Session.Clear();
+                 }
+                 Response.Cookies.Clear();
+                 Response.Redirect("~");
+                
             }
             else {
                 CommonTools.ErrorReporting(lastException);
