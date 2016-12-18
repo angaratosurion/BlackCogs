@@ -185,6 +185,7 @@
     <Compile Include="Controllers\Factory\CustomControllerFactory.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\Context.cs" />
+    <Compile Include="Data\Models\BannedUsers.cs" />
     <Compile Include="Data\Models\Feature.cs" />
     <Compile Include="Data\Models\GeneralSettings.cs" />
     <Compile Include="Data\Models\IdentityModels.cs" />

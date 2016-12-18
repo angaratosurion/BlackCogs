@@ -25,6 +25,7 @@ namespace BlackCogs.Data
         }
         public IDbSet<Feature> Features { get; set; }
         public IDbSet<GeneralSettings> Settings { get; set; }
+        public IDbSet<BannedUsers> BannedUsers { get; set; }
         public GeneralSettings GeneralSettings
         {
             get
