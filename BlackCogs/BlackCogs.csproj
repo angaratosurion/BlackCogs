@@ -189,6 +189,7 @@
     <Compile Include="Data\Models\Feature.cs" />
     <Compile Include="Data\Models\GeneralSettings.cs" />
     <Compile Include="Data\Models\IdentityModels.cs" />
+    <Compile Include="Data\ViewModels\ViewExceptionModel.cs" />
     <Compile Include="Data\ViewModels\Identity\AccountViewModels.cs" />
     <Compile Include="Data\ViewModels\Identity\ManageViewModels.cs" />
     <Compile Include="Data\ViewModels\ViewAddUserToRole.cs" />
