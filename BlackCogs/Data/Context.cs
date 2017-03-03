@@ -26,6 +26,7 @@ namespace BlackCogs.Data
         public IDbSet<Feature> Features { get; set; }
         public IDbSet<GeneralSettings> Settings { get; set; }
         public IDbSet<BannedUsers> BannedUsers { get; set; }
+
         public GeneralSettings GeneralSettings
         {
             get
@@ -33,6 +34,9 @@ namespace BlackCogs.Data
                 return this.Settings.FirstOrDefault();
             }
         }
+        public IDbSet<News> News { get; set; }
+        public IDbSet<FileType> FileTypes { get; set; }
+    
         //
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

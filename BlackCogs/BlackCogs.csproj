@@ -186,9 +186,14 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\Models\BannedUsers.cs" />
+    <Compile Include="Data\Models\Category.cs" />
     <Compile Include="Data\Models\Feature.cs" />
+    <Compile Include="Data\Models\Files.cs" />
+    <Compile Include="Data\Models\FileType.cs" />
     <Compile Include="Data\Models\GeneralSettings.cs" />
     <Compile Include="Data\Models\IdentityModels.cs" />
+    <Compile Include="Data\Models\News.cs" />
+    <Compile Include="Data\Models\Tag.cs" />
     <Compile Include="Data\ViewModels\ViewExceptionModel.cs" />
     <Compile Include="Data\ViewModels\Identity\AccountViewModels.cs" />
     <Compile Include="Data\ViewModels\Identity\ManageViewModels.cs" />
