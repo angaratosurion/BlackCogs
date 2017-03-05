@@ -18,8 +18,8 @@ using BlackCogs.Application;
 
 namespace BlackCogs.Controllers
 {
-    //[Export("Account", typeof(IController))]
-    //[PartCreationPolicy(CreationPolicy.NonShared)]
+    [Export("Account", typeof(IController))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     [Authorize]
    
     public abstract class AccountController : Controller
