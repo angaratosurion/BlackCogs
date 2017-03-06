@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
+using BlackCogs.Configuration;
 
 namespace BlackCogs.Controllers
 {
@@ -12,9 +14,17 @@ namespace BlackCogs.Controllers
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class HomeController : Controller
     {
+
+        BlackCogsSettingManager set = new BlackCogsSettingManager();
         public ActionResult Index()
         {
-            return View();
+
+            string cont = set.DefaultController();
+            string act= set.DefaultAction();
+
+           
+
+            return RedirectToAction(act, cont);
         }
 
         public ActionResult About()

@@ -13,6 +13,10 @@ namespace BlackCogs.Configuration
         Boolean searchforbinariesatmodulesfodler;
         public const string BinariesONModulesFolder = "BinariesONModulesFolder";
         public const string ConstExceptionShowingonBrowser = "ExcShownOnBrowser";
+        public const string ConstDefaultController = "DefaultController";
+        public const string ConstDefaultAction = "DefaultAction";
+
+
         public static Boolean ExceptionShownonBrowser = true;
         public  Boolean IsBinariesEnabledOnModulesFolder()
         {
@@ -54,6 +58,52 @@ namespace BlackCogs.Configuration
                 CommonTools.ErrorReporting(ex);
                 return true;
             }
+        }
+       public string DefaultController()
+        {
+            try
+            {
+                string ap = null;
+
+                var val = rdr.GetValue(ConstDefaultController, typeof(string));
+                if ( val!=null)
+                {
+                    ap = Convert.ToString(val);
+                }
+
+                return ap;
+
+
+            }
+            catch (Exception ex)
+            {
+                CommonTools.ErrorReporting(ex);
+                return null;
+            }
+
+        }
+        public string DefaultAction()
+        {
+            try
+            {
+                string ap = null;
+
+                var val = rdr.GetValue(ConstDefaultAction, typeof(string));
+                if (val != null)
+                {
+                    ap = Convert.ToString(val);
+                }
+
+                return ap;
+
+
+            }
+            catch (Exception ex)
+            {
+                CommonTools.ErrorReporting(ex);
+                return null;
+            }
+
         }
     }
 }
