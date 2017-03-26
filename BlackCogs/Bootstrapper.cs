@@ -17,12 +17,12 @@ namespace BlackCogs
     {
         private static CompositionContainer CompositionContainer;
         private static bool IsLoaded = false;
-        
-        //   static CommonTools cmTools = new CommonTools();
+       //   static CommonTools cmTools = new CommonTools();
         [ImportMany]
         private static IEnumerable<Lazy<IRouteRegistrar, IRouteRegistrarMetadata>> RouteRegistrars;
         private static IEnumerable<Lazy<IActionVerb, IActionVerbMetadata>> ActionVerbs;
         private static IEnumerable<Lazy<IModuleInfo>> ModuleInfos;
+
         public static void Compose(List<string> pluginFolders)
         {
             try
@@ -43,10 +43,9 @@ namespace BlackCogs
 
                 }
                 CompositionContainer = new CompositionContainer(catalog);
-
-                CompositionContainer.ComposeParts();
+                   CompositionContainer.ComposeParts();
                 ActionVerbs = CompositionContainer.GetExports<IActionVerb, IActionVerbMetadata>();
-                ModuleInfos = CompositionContainer.GetExports<IModuleInfo>();
+                ModuleInfos = CompositionContainer.GetExports<IModuleInfo> ();
                 RouteRegistrars = CompositionContainer.GetExports<IRouteRegistrar,IRouteRegistrarMetadata>();
                 RegisterRoutes();
                 IsLoaded = true;
@@ -81,6 +80,7 @@ namespace BlackCogs
                     }
                 }
                 CompositionContainer = new CompositionContainer(catalog);
+               
 
                 CompositionContainer.ComposeParts();
                 ActionVerbs = CompositionContainer.GetExports<IActionVerb, IActionVerbMetadata>();
@@ -154,7 +154,8 @@ namespace BlackCogs
         public static IEnumerable<IModuleInfo> GetAllModulesInfo()
         {
             List<IModuleInfo> ap = new List<IModuleInfo>();
-
+            
+            
             foreach (var inf in ModuleInfos)
             {
                 ap.Add(inf.Value);
@@ -234,5 +235,7 @@ namespace BlackCogs
                 }
             }
         }
+    
+
     }
 }

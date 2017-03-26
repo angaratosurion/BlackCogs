@@ -9,7 +9,7 @@ using BlackCogs.Interfaces;
 
 namespace BlackCogs.ModuleInfo
 {
-    [Export(typeof(IModuleInfo))]
+    [Export(typeof(IModuleInfo)), ExportMetadata("ID", "3")]
     public class BlackCogsInfo : IModuleInfo
     {
         public string Description
