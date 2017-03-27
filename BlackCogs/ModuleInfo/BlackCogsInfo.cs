@@ -9,7 +9,8 @@ using BlackCogs.Interfaces;
 
 namespace BlackCogs.ModuleInfo
 {
-    [Export(typeof(IModuleInfo))]
+    [Export(typeof(IModuleInfo)), ExportMetadata("Type", "ModuleInfo1")]
+  
     public class BlackCogsInfo : IModuleInfo
     {
         public string Description
@@ -18,6 +19,7 @@ namespace BlackCogs.ModuleInfo
             {
                 return "";
             }
+            set { }
         }
 
         public string Name
@@ -26,6 +28,7 @@ namespace BlackCogs.ModuleInfo
             {
                 return "BlackCogs";
             }
+            set { }
         }
 
         public string SourceCode
@@ -34,6 +37,7 @@ namespace BlackCogs.ModuleInfo
             {
                 return "https://github.com/angaratosurion/BlackCogs";
             }
+            set { }
         }
 
         public string Version
@@ -42,6 +46,7 @@ namespace BlackCogs.ModuleInfo
             {
                 return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
+            set { }
         }
 
         public string WebSite
@@ -50,6 +55,7 @@ namespace BlackCogs.ModuleInfo
             {
                 return "http://pariskoutsioukis.net/blog/";
             }
+            set { }
         }
     }
 }

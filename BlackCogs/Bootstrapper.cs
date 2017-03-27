@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.Web.Mvc;
 using BlackCogs.Configuration;
 using System.Web.Routing;
+using BlackCogs.ModuleInfo;
+using BlackCogs.Attributes.Assembly;
 
 namespace BlackCogs
 {
@@ -24,7 +26,8 @@ namespace BlackCogs
         [ImportMany]
         private static IEnumerable<Lazy<IActionVerb, IActionVerbMetadata>> ActionVerbs;
         [ImportMany]
-        private static IEnumerable<Lazy<IModuleInfo>> ModuleInfos;
+        private static IEnumerable<Lazy<IModuleInfo,IModuleInfoMetadata>> ModuleInfos;
+      
 
         public static void Compose(List<string> pluginFolders)
         {
@@ -48,7 +51,7 @@ namespace BlackCogs
                 CompositionContainer = new CompositionContainer(catalog);
                    CompositionContainer.ComposeParts();
                 ActionVerbs = CompositionContainer.GetExports<IActionVerb, IActionVerbMetadata>();
-                ModuleInfos = CompositionContainer.GetExports<IModuleInfo> ();
+                ModuleInfos = CompositionContainer.GetExports<IModuleInfo,IModuleInfoMetadata> ();
                 RouteRegistrars = CompositionContainer.GetExports<IRouteRegistrar,IRouteRegistrarMetadata>();
                 RegisterRoutes();
                 Catlgs= catalog;
@@ -88,7 +91,7 @@ namespace BlackCogs
 
                 CompositionContainer.ComposeParts();
                 ActionVerbs = CompositionContainer.GetExports<IActionVerb, IActionVerbMetadata>();
-                ModuleInfos = CompositionContainer.GetExports<IModuleInfo>();
+                ModuleInfos = CompositionContainer.GetExports<IModuleInfo, IModuleInfoMetadata> ();
                 RouteRegistrars = CompositionContainer.GetExports<IRouteRegistrar, IRouteRegistrarMetadata>();
                 RegisterRoutes();
                 Catlgs = catalog;
@@ -161,7 +164,7 @@ namespace BlackCogs
             List<IModuleInfo> ap = new List<IModuleInfo>();
 
             ap = GetAssembliesInfo();
-            
+           
             foreach (var inf in ModuleInfos)
             {
                 ap.Add(inf.Value);
@@ -256,7 +259,10 @@ namespace BlackCogs
                 foreach( var   f in files)
                     {
                         var a = GetAssemblyInfo(f);
-                    ap.Add(a);
+                    if (a != null)
+                    {
+                        ap.Add(a);
+                    }
                     }
 
                 return ap;
@@ -272,7 +278,7 @@ namespace BlackCogs
         {
             try
             {
-                IModuleInfo ap =null;
+                EmptyModuleInfo ap =null;
                 if ( CommonTools.isEmpty(filename)==false)
                 {
                     var asm = Assembly.LoadFrom(filename);
@@ -281,10 +287,24 @@ namespace BlackCogs
                      .Any(a => a.GetType().Name == "ExportAttribute"));
 
 
+                    if (myClassType !=null)
+                    {
+                        ap = new EmptyModuleInfo();
+                        object [] c=asm.GetCustomAttributes(typeof(ModuleInfoAssemblySourceCodeAttribute)).ToArray();
+                        //.GetCustomAttributes(typeof(ModuleInfoAssemblySourceCodeAttribute)).ToArray();
+                        ap.SourceCode = ((ModuleInfoAssemblySourceCodeAttribute) c[0]).SourceCode;
+                       ap.WebSite = asm.GetCustomAttribute<ModuleInfoAssemblyWebSiteAttribute>().WebSite;
+                        ap.Version = asm.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+                        ap.Name = asm.GetCustomAttribute<AssemblyProductAttribute>().Product;
+                        ap.Description = asm.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
 
 
 
-                    ap = (IModuleInfo)myClassType;
+
+                    }
+
+
+                    //ap = (IModuleInfo)myClassType;
                 }
 
 

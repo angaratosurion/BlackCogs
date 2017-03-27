@@ -8,10 +8,10 @@ namespace BlackCogs.Interfaces
 {
     public interface IModuleInfo
     {
-        string Name { get; }
+        string Name { get;  }
        string  Description { get; }
         string Version { get; }
-        string WebSite { get;  }
-        string SourceCode { get; }
+        string WebSite { get; }
+        string SourceCode { get;  }
     }
 }

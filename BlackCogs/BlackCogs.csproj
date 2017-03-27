@@ -185,6 +185,8 @@
     <Compile Include="Application\App_Start\Startup.Auth.cs" />
     <Compile Include="Application\EmailService .cs" />
     <Compile Include="Application\SmsService.cs" />
+    <Compile Include="Attributes\Assembly\ModuleInfoAssemblySourceCodeAttribute.cs" />
+    <Compile Include="Attributes\Assembly\ModuleInfoAssemblyWebSiteAttribute.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CommonTools.cs" />
     <Compile Include="Configuration\BlackCogsSettingManager.cs" />
@@ -214,6 +216,7 @@
     <Compile Include="Interfaces\IActionVerbMetadata.cs" />
     <Compile Include="Interfaces\IControllerMetadata.cs" />
     <Compile Include="Interfaces\IModuleInfo.cs" />
+    <Compile Include="Interfaces\IModuleInfoMetadata.cs" />
     <Compile Include="Interfaces\IRouteRegistrar.cs" />
     <Compile Include="Interfaces\IRouteRegistrarMetadata.cs" />
     <Compile Include="Managers\FeatureManager.cs" />
@@ -221,6 +224,7 @@
     <Compile Include="Managers\BlackCogsUserManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModuleInfo\BlackCogsInfo.cs" />
+    <Compile Include="ModuleInfo\EmptyModuleInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\BlackRouteCollectionExtensions.cs" />
     <Compile Include="Views\Engines\CustomViewEngine.cs" />
