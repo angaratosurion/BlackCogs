@@ -165,10 +165,10 @@ namespace BlackCogs
 
             ap = GetAssembliesInfo();
            
-            foreach (var inf in ModuleInfos)
+           /* foreach (var inf in ModuleInfos)
             {
                 ap.Add(inf.Value);
-            }
+            }*/
 
             return ap;
         }
