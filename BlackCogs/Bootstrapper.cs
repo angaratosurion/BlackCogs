@@ -17,10 +17,13 @@ namespace BlackCogs
     {
         private static CompositionContainer CompositionContainer;
         private static bool IsLoaded = false;
-       //   static CommonTools cmTools = new CommonTools();
+        //   static CommonTools cmTools = new CommonTools();
+        static AggregateCatalog Catlgs;
         [ImportMany]
         private static IEnumerable<Lazy<IRouteRegistrar, IRouteRegistrarMetadata>> RouteRegistrars;
+        [ImportMany]
         private static IEnumerable<Lazy<IActionVerb, IActionVerbMetadata>> ActionVerbs;
+        [ImportMany]
         private static IEnumerable<Lazy<IModuleInfo>> ModuleInfos;
 
         public static void Compose(List<string> pluginFolders)
@@ -48,6 +51,7 @@ namespace BlackCogs
                 ModuleInfos = CompositionContainer.GetExports<IModuleInfo> ();
                 RouteRegistrars = CompositionContainer.GetExports<IRouteRegistrar,IRouteRegistrarMetadata>();
                 RegisterRoutes();
+                Catlgs= catalog;
                 IsLoaded = true;
             }
             catch (Exception ex)
@@ -87,6 +91,7 @@ namespace BlackCogs
                 ModuleInfos = CompositionContainer.GetExports<IModuleInfo>();
                 RouteRegistrars = CompositionContainer.GetExports<IRouteRegistrar, IRouteRegistrarMetadata>();
                 RegisterRoutes();
+                Catlgs = catalog;
                 IsLoaded = true;
             }
             catch (Exception ex)
@@ -154,7 +159,8 @@ namespace BlackCogs
         public static IEnumerable<IModuleInfo> GetAllModulesInfo()
         {
             List<IModuleInfo> ap = new List<IModuleInfo>();
-            
+
+            ap = GetAssembliesInfo();
             
             foreach (var inf in ModuleInfos)
             {
@@ -233,6 +239,61 @@ namespace BlackCogs
                 {
                     CommonTools.ErrorReporting(ex);
                 }
+            }
+        }
+        public static  List<IModuleInfo> GetAssembliesInfo()
+        {
+            try
+            {
+                List<IModuleInfo> ap = new List<IModuleInfo>();
+
+               foreach( var f in Catlgs.ToList())
+                {
+                  
+                }
+                var files = Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin"), "*.dll");
+               
+                foreach( var   f in files)
+                    {
+                        var a = GetAssemblyInfo(f);
+                    ap.Add(a);
+                    }
+
+                return ap;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        public static  IModuleInfo GetAssemblyInfo(string filename)
+        {
+            try
+            {
+                IModuleInfo ap =null;
+                if ( CommonTools.isEmpty(filename)==false)
+                {
+                    var asm = Assembly.LoadFrom(filename);
+                    var myClassType = asm.GetTypes()
+                     .FirstOrDefault(t => t.GetCustomAttributes()
+                     .Any(a => a.GetType().Name == "ExportAttribute"));
+
+
+
+
+
+                    ap = (IModuleInfo)myClassType;
+                }
+
+
+
+                return ap;
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
     
