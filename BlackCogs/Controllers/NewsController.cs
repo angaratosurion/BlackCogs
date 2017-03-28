@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using BlackCogs.Data;
 using BlackCogs.Data.Models;
+using BlackCogs.Data.ViewModels;
 
 namespace BlackCogs.Controllers
 {
@@ -21,7 +22,29 @@ namespace BlackCogs.Controllers
         // GET: News
         public ActionResult Index()
         {
-            return View(db.News.ToList());
+
+
+            try
+            {
+
+                List<ViewNews> vlist = new List<ViewNews>();
+                List<News> news = db.News.ToList();
+                foreach(var v in news)
+                {
+                    ViewNews vn = new ViewNews();
+                    vn.ImportFromModel(v);
+                    vlist.Add(vn);
+                }
+
+
+                return View(vlist);
+            }
+            catch (Exception ex)
+            {
+
+                CommonTools.ErrorReporting(ex);
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         // GET: News/Details/5
@@ -36,7 +59,9 @@ namespace BlackCogs.Controllers
             {
                 return HttpNotFound();
             }
-            return View(news);
+            ViewNews vn = new ViewNews();
+            vn.ImportFromModel(news);
+            return View(vn);
         }
 
         // GET: News/Create
@@ -50,11 +75,11 @@ namespace BlackCogs.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Published,content,RowVersion")] News news)
+        public ActionResult Create([Bind(Include = "Id,Title,Published,content,RowVersion")] ViewNews news)
         {
             if (ModelState.IsValid)
             {
-                db.News.Add(news);
+                db.News.Add(news.ExportToModel());
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -74,7 +99,10 @@ namespace BlackCogs.Controllers
             {
                 return HttpNotFound();
             }
-            return View(news);
+            ViewNews vn = new ViewNews();
+            vn.ImportFromModel(news);
+
+            return View(vn);
         }
 
         // POST: News/Edit/5
@@ -82,11 +110,11 @@ namespace BlackCogs.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Published,content,RowVersion")] News news)
+        public ActionResult Edit([Bind(Include = "Id,Title,Published,content,RowVersion")] ViewNews news)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(news).State = EntityState.Modified;
+                db.Entry(news.ExportToModel()).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -105,7 +133,9 @@ namespace BlackCogs.Controllers
             {
                 return HttpNotFound();
             }
-            return View(news);
+            ViewNews vn = new ViewNews();
+            vn.ImportFromModel(news);
+            return View(vn);
         }
 
         // POST: News/Delete/5

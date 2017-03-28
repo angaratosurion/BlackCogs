@@ -12,11 +12,13 @@ namespace BlackCogs.Data.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public virtual ApplicationUser User { get; set; }
+        public string User { get; set; }
         [Required]
         public DateTime DateTime { get; set; }
         [Required]
-        public virtual ApplicationUser BannedBy{ get; set; }
+        public string BannedBy{ get; set; }
+        [Timestamp]
+        public Byte[] RowVersion { get; set; }
 
     }
 }

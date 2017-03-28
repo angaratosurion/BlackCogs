@@ -14,6 +14,7 @@ namespace BlackCogs
         public static ApplicationSignInManager _signInManager;
         public static ApplicationUserManager _userManager;
         public static FeatureManager featuremng = new FeatureManager();
+        public static BlackCogsUserManager Blusrmng = new BlackCogsUserManager();
         public static  Boolean isEmpty(string str)
        {
            try

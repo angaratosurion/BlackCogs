@@ -206,12 +206,15 @@
     <Compile Include="Data\Models\IdentityModels.cs" />
     <Compile Include="Data\Models\News.cs" />
     <Compile Include="Data\Models\Tag.cs" />
+    <Compile Include="Data\ViewModels\ViewBannedUsers.cs" />
     <Compile Include="Data\ViewModels\ViewExceptionModel.cs" />
     <Compile Include="Data\ViewModels\Identity\AccountViewModels.cs" />
     <Compile Include="Data\ViewModels\Identity\ManageViewModels.cs" />
     <Compile Include="Data\ViewModels\ViewAddUserToRole.cs" />
     <Compile Include="Data\ViewModels\ViewDeleteUserFromRole.cs" />
+    <Compile Include="Data\ViewModels\ViewFiles.cs" />
     <Compile Include="Data\ViewModels\ViewIdentityRoleDetails.cs" />
+    <Compile Include="Data\ViewModels\ViewNews.cs" />
     <Compile Include="Interfaces\IActionVerb.cs" />
     <Compile Include="Interfaces\IActionVerbMetadata.cs" />
     <Compile Include="Interfaces\IControllerMetadata.cs" />
@@ -241,6 +244,14 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\News\Create.cshtml" />
+    <None Include="Views\News\Delete.cshtml" />
+    <None Include="Views\News\Details.cshtml" />
+    <None Include="Views\News\Edit.cshtml" />
+    <None Include="Views\News\Index.cshtml" />
     <None Include="Views\User\AddUserToRole.cshtml" />
     <None Include="Views\User\CreateNewRole.cshtml" />
     <None Include="Views\User\CreateNewUser.cshtml" />
@@ -250,6 +261,8 @@
     <None Include="Views\User\Index.cshtml" />
     <None Include="Views\User\RemoveUserFromRole.cshtml" />
     <None Include="Views\User\RoleDetails.cshtml" />
+    <None Include="Views\Web.config" />
+    <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

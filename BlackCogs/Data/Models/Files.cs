@@ -20,7 +20,7 @@ namespace BlackCogs.Data.Models
         [Timestamp]
         public Byte[] RowVersion { get; set; }
 
-        public virtual ApplicationUser Owner { get; set; }
+        public  string Owner { get; set; }
 
         public virtual FileType FileType { get; set; }
 
